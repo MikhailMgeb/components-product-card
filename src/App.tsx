@@ -9,43 +9,23 @@ import './App.css';
 
 const App = () => {
   return (
-
     <div className="App">
       <ProductCard srcProduct={bagProductImage}
-        discount={''}
-        discountPrice={'1450'}
+        discountPercent={'-25%'}
+        discountPrice={1450}
         title={'Портативная Медици...'}
-        price={'1645'}
-        ratingStarNumber={'4.7'}
-        countSold={123} />
+        price={1645}
+        ratingStarNumber={4.7}
+        countSold={12}
+      />
       <ProductCard srcProduct={bagProductImage}
-        discount={'-25%'}
-        discountPrice={'1450'}
+        discountPercent={'-10%'}
+        discountPrice={1450}
         title={'Портативная Медици...'}
-        price={'1645'}
-        ratingStarNumber={'4.7'}
-        countSold={123} />
-      <ProductCard srcProduct={bagProductImage}
-        discount={'-50%'}
-        discountPrice={'1450'}
-        title={'Портативная Медици...'}
-        price={'1645'}
-        ratingStarNumber={'4.7'}
-        countSold={123} />
-      <ProductCard srcProduct={bagProductImage}
-        discount={'-10%'}
-        discountPrice={'1450'}
-        title={'Портативная Медици...'}
-        price={'1645'}
-        ratingStarNumber={'4.7'}
-        countSold={123} />
-      <ProductCard srcProduct={bagProductImage}
-        discount={''}
-        discountPrice={'1450'}
-        title={'Портативная Медици...'}
-        price={'1645'}
-        ratingStarNumber={'4.7'}
-        countSold={1} />
+        price={1645}
+        countSold={2}
+        ratingStarNumber={4.7}
+      />
     </div>
   );
 }

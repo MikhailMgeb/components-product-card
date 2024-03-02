@@ -2,57 +2,62 @@ import React from 'react';
 import { FC } from 'react';
 
 import { cnProductCard } from './ProductCard.classname';
-import iconSrc from '../../assets/icons/Vector.svg'
+import iconSrc from '../../assets/icons/Vector.svg';
 
 import './ProductCard.css';
 
 type ProductCardProps = {
     srcProduct: string;
-    discount: string;
-    price: string;
+    discountPercent?: string;
+    price: number;
     title: string;
-    discountPrice: string;
-    ratingStarNumber: string;
-    countSold: number;
+    discountPrice?: number;
+    ratingStarNumber?: number;
+    countSold?: number;
 }
 
-const ProductCard: FC<ProductCardProps> = ({ srcProduct, discount, price, discountPrice, title, ratingStarNumber, countSold }) => {
+const ProductCard: FC<ProductCardProps> = ({ srcProduct, discountPercent, price, discountPrice, title, ratingStarNumber, countSold }) => {
+    let countSoldText;
+    let isDiscount = true;
 
-    const countSoldText = countSold > 1 ? ' купили' : ' купил/а';
+    if (countSold !== undefined) {
+        countSoldText = countSold > 1 ? ' купили' : ' купил/а';
+    }
+
+    if (discountPrice === undefined) {
+        isDiscount = false;
+    }
 
     return (
         <div className={cnProductCard()}>
             <div className={cnProductCard('Top')}>
-                <a className={cnProductCard('Link')} href='/'>
+                <a className={cnProductCard('Link')} href="/">
                     <img className={cnProductCard('Image')} src={srcProduct} alt="product-card" />
                 </a>
-                {discount ? <div className={cnProductCard('Label')}>
-                    {discount} </div> : ''}
+                {discountPercent && <div className={cnProductCard('Label')}>{discountPercent} </div>}
             </div>
             <div className={cnProductCard('Bottom')} >
-                <a href='/' className={cnProductCard('Title')} >{title}</a>
+                <a href="/" className={cnProductCard('Title')} >{title}</a>
                 <div className={cnProductCard('Rating')}>
-                    <div className={cnProductCard('RatingStar')}>
+                    {ratingStarNumber && <div className={cnProductCard('RatingStar')}>
                         <p className={cnProductCard('Text', { ratingStarNumber: true })}>
                             {ratingStarNumber}
                         </p>
-                        <img className={cnProductCard('icon', { icon: true })} src={iconSrc} alt='icon' />
-                    </div>
-                    <div className={cnProductCard('CountSold')}>
-                        <p className={cnProductCard('CountSold')}>{countSold}
+                        <img className={cnProductCard('icon', { icon: true })} src={iconSrc} alt="icon" />
+                    </div>}
+                    {countSold && <div className={cnProductCard('CountSold')}>
+                        <p className={cnProductCard('CountSold')}>
+                            {countSold}
                             <span className={cnProductCard('CountSoldText')}>{countSoldText}</span>
                         </p>
-
-                    </div>
-
+                    </div>}
                 </div>
                 <div className={cnProductCard('Prices')}>
-                    <div className={cnProductCard('Price', { discount: true })}>
-                        {discountPrice + '₽'}
-                    </div>
-                    {price ? <div className={cnProductCard('Price', { common: true })}>
-                        {price + '₽'}
-                    </div> : ''}
+                    {discountPrice && <div className={cnProductCard('Price', { discount: true })}>
+                        {discountPrice + "₽"}
+                    </div>}
+                    {price &&
+                        <div className={cnProductCard('Price', { common: isDiscount })}>{price + "₽"}</div>}
                 </div>
             </div>
         </div>
